@@ -14,7 +14,7 @@ const Content = () => (
         <Col key={i} md={5} className="mb-4">
           <h6 className="mb-3">
             <a href={col.link}>
-              <FontAwesomeIcon icon="link" className="mr-2" />
+              {/* <FontAwesomeIcon icon="fas fa-link" className="mr-2" /> */}
               {col.title}
             </a>
           </h6>
