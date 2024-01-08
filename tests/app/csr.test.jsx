@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-import CSRPage from '../../app/csr/page';
+import CSRPage from '../../app/examples/csr/page';
 
 describe('csr', () => {
   it('should render without crashing', async () => {

@@ -40,17 +40,17 @@ const NavBar = () => {
               {user && (
                 <>
                   <NavItem>
-                    <PageLink href="/csr" className="nav-link" testId="navbar-csr">
+                    <PageLink href="/examples/csr" className="nav-link" testId="navbar-csr">
                       Client-side rendered page
                     </PageLink>
                   </NavItem>
                   <NavItem>
-                    <PageLink href="/ssr" className="nav-link" testId="navbar-ssr">
+                    <PageLink href="/examples/ssr" className="nav-link" testId="navbar-ssr">
                       Server-side rendered page
                     </PageLink>
                   </NavItem>
                   <NavItem>
-                    <PageLink href="/external" className="nav-link" testId="navbar-external">
+                    <PageLink href="/examples/external" className="nav-link" testId="navbar-external">
                       External API
                     </PageLink>
                   </NavItem>
@@ -87,7 +87,7 @@ const NavBar = () => {
                       {user.name}
                     </DropdownItem>
                     <DropdownItem className="dropdown-profile" tag="span">
-                      <PageLink href="/profile" icon="user" testId="navbar-profile-desktop">
+                      <PageLink href="/examples/profile" icon="user" testId="navbar-profile-desktop">
                         Profile
                       </PageLink>
                     </DropdownItem>
@@ -134,8 +134,8 @@ const NavBar = () => {
                   </span>
                 </NavItem>
                 <NavItem>
-                  <PageLink href="/profile" icon="user" testId="navbar-profile-mobile">
-                    Profile
+                  <PageLink href="/examples/profile" icon="user" testId="navbar-profile-mobile">
+                    Profiles
                   </PageLink>
                 </NavItem>
                 <NavItem id="qsLogoutBtn">

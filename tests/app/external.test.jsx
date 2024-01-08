@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 
-import _External from '../../app/external/page';
+import _External from '../../app/examples/external/page';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 const External = () => (

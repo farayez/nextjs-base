@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { mockUser } from '../fixtures';
-import SSRPageComponent from '../../app/ssr/page';
+import SSRPageComponent from '../../app/examples/ssr/page';
 
 describe('ssr', () => {
   it('should render without crashing', async () => {

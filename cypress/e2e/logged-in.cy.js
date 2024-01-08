@@ -55,7 +55,7 @@ describe('logged in', () => {
 
     it('should display the client-side rendered page', () => {
       cy.get('[data-testid=navbar-csr]').click();
-      cy.url().should('eq', `${Cypress.config().baseUrl}/csr`);
+      cy.url().should('eq', `${Cypress.config().baseUrl}/examples/csr`);
 
       cy.get('[data-testid=navbar-csr]').isActive();
       cy.get('[data-testid=csr]').should('be.visible');
@@ -63,7 +63,7 @@ describe('logged in', () => {
 
     it('should display the server-side rendered page', () => {
       cy.get('[data-testid=navbar-ssr]').click();
-      cy.url().should('eq', `${Cypress.config().baseUrl}/ssr`);
+      cy.url().should('eq', `${Cypress.config().baseUrl}/examples/ssr`);
 
       cy.get('[data-testid=navbar-ssr]').isActive();
       cy.get('[data-testid=ssr]').should('be.visible');
@@ -72,7 +72,7 @@ describe('logged in', () => {
 
     it('should display the external API page', () => {
       cy.get('[data-testid=navbar-external]').click();
-      cy.url().should('eq', `${Cypress.config().baseUrl}/external`);
+      cy.url().should('eq', `${Cypress.config().baseUrl}/examples/external`);
 
       cy.get('[data-testid=navbar-external]').isActive();
       cy.get('[data-testid=external]').should('be.visible');
@@ -87,7 +87,7 @@ describe('logged in', () => {
     it('should display the profile page', () => {
       cy.get('[data-testid=navbar-menu-desktop]').click();
       cy.get('[data-testid=navbar-profile-desktop]').click();
-      cy.url().should('eq', `${Cypress.config().baseUrl}/profile`);
+      cy.url().should('eq', `${Cypress.config().baseUrl}/examples/profile`);
 
       cy.get('[data-testid=profile]').should('be.visible');
       cy.get('[data-testid=profile-email]').contains(EMAIL);

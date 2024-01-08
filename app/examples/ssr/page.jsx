@@ -1,7 +1,7 @@
 import React from 'react';
 import { getSession, withPageAuthRequired } from '@auth0/nextjs-auth0';
 
-import Highlight from '../../components/Highlight';
+import Highlight from '../../../components/Highlight';
 
 export default withPageAuthRequired(
   async function SSRPage() {
@@ -27,5 +27,5 @@ export default withPageAuthRequired(
       </>
     );
   },
-  { returnTo: '/ssr' }
+  { returnTo: '/examples/ssr' }
 );
