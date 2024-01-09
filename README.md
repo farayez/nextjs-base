@@ -10,15 +10,8 @@ This sample demonstrates the following use cases:
 - [Protecting client-side rendered pages](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/profile.jsx#L43-L46)
 - [Calling APIs](https://github.com/auth0-samples/auth0-nextjs-samples/blob/main/Sample-01/pages/external.jsx)
 
-## Project setup
 
-Use `npm` to install the project dependencies:
-
-```bash
-npm install
-```
-
-## Configuration
+## Auth0 Configuration
 
 ### Create an API
 
@@ -51,29 +44,55 @@ AUTH0_AUDIENCE='YOUR_AUTH0_API_IDENTIFIER'
 AUTH0_SCOPE='openid profile email read:shows'
 ```
 
+Get `AUTH0_AUDIENCE` from [AUTH0 Apis page](https://manage.auth0.com/?_gl=1*fk70dm*_gcl_au*Nzc5NzI3MzQzLjE3MDQ1NTk0OTM.*rollup_ga*NjgyNjM1MjQyLjE3MDQ1NTg2MDg.*rollup_ga_F1G3E656YZ*MTcwNDY5NzAxOS43LjEuMTcwNDY5ODE2MS42MC4wLjA.*_ga*NjgyNjM1MjQyLjE3MDQ1NTg2MDg.*_ga_QKMSDV5369*MTcwNDY5NzAyNi44LjEuMTcwNDY5ODMzNi42MC4wLjA.&_ga=2.39848290.1184183585.1704558609-682635242.1704558608#/apis)
+
 **Note**: Make sure you replace `AUTH0_SECRET` with your own secret (you can generate a suitable string using `openssl rand -hex 32` on the command line).
 
-## Run the sample
+## Build and Run the Application During Development
 
-### Compile and hot-reload for development
+### Build image and start a container
 
-This compiles and serves the Next.js app and starts the API server on port 3001.
-
-```bash
-npm run dev
-```
-
-## Deployment
-
-### Compiles and minifies for production
+- Build image
+- Install dependencies
+- Compile and serve Next.js app
+- Start the API server on port 3000
+- Allow hot-reload
 
 ```bash
-npm run build
+docker compose up --build server
 ```
 
-### Docker build
+### Enter running container
 
-To build and run the Docker image, run `exec.sh`, or `exec.ps1` on Windows.
+```bash
+docker compose exec server sh
+```
+
+## Build and Run the Application To Simulate Deployment
+
+### Build image and start a container
+
+- Build image for deployment
+- Install dependencies
+- Compile and minify for production
+- Start the API server on port 3000
+
+Run `exec.sh`, or `exec.ps1` on Windows.
+
+```bash
+sh exec.sh
+```
+
+## Build the Application Image For Deployment
+
+### Build image
+- Build image for deployment
+- Install dependencies
+- Compile and minify for production
+
+```bash
+docker build --file Dockerfile.prod -t nextjs-base-01 .
+```
 
 ### Run the unit tests
 
@@ -87,21 +106,7 @@ npm run test
 npm run test:integration
 ```
 
-## What is Auth0?
-
-Auth0 helps you to:
-
-* Add authentication with [multiple sources](https://auth0.com/docs/identityproviders), either social identity providers such as **Google, Facebook, Microsoft Account, LinkedIn, GitHub, Twitter, Box, Salesforce** (amongst others), or enterprise identity systems like **Windows Azure AD, Google Apps, Active Directory, ADFS, or any SAML Identity Provider**.
-* Add authentication through more traditional **[username/password databases](https://auth0.com/docs/connections/database/custom-db)**.
-* Add support for **[linking different user accounts](https://auth0.com/docs/users/user-account-linking)** with the same user.
-* Support for generating signed [JSON Web Tokens](https://auth0.com/docs/tokens/json-web-tokens) to call your APIs and **flow the user identity** securely.
-* Analytics of how, when, and where users are logging in.
-* Pull data from other sources and add it to the user profile through [JavaScript rules](https://auth0.com/docs/rules).
-
-## Create a Free Auth0 Account
-
-1. Go to [Auth0](https://auth0.com) and click **Sign Up**.
-2. Use Google, GitHub, or Microsoft Account to login.
+docker build -t nextjs-base-test --progress=plain --no-cache --target test .
 
 ## Issue Reporting
 
@@ -109,8 +114,12 @@ If you have found a bug or if you have a feature request, please report them at 
 
 ## Author
 
-[Auth0](https://auth0.com)
+- [Auth0](https://auth0.com)
+- [Araf Farayez](https://github.com/farayez)
 
 ## License
 
 This project is licensed under the MIT license. See the [LICENSE](./LICENSE) file for more info.
+
+
+# Cypress
