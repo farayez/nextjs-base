@@ -1,31 +1,41 @@
 services:
-  server:
+  web:
     build:
-      context: .
+      context: ./web
       target: dev
-    environment:
-      POSTGRES_HOST: db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_DB: example
+    # command: "-f /dev/null"
+    # entrypoint: /usr/bin/tail
     ports:
       - 3000:3000
+    volumes:
+      - ./web/package.json:/app/package.json
+      - ./web/package-lock.json:/app/package-lock.json
+      - ./web/.env:/app/.env
+      - ./web/app:/app/app
+      - ./web/components:/app/components
+      - ./web/utils:/app/utils
+      - ./web/tests:/app/tests
+  api:
+    build:
+      context: ./api
+      target: dev
+    # environment:
+    #   POSTGRES_HOST: db
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+    #   POSTGRES_DB: example
+    ports:
       - 3001:3001
     volumes:
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ./.env:/app/.env
-      - ./app:/app/app
-      - ./components:/app/components
-      - ./utils:/app/utils
-      - ./api-server.js:/app/api-server.js
-      - ./tests:/app/tests
+      - ./api/package.json:/app/package.json
+      - ./api/package-lock.json:/app/package-lock.json
+      - ./api/.env:/app/.env
+      - ./api/api-server.js:/app/api-server.js
     # depends_on:
     #   db:
     #     condition: service_healthy
     # secrets:
     #   - db-password
-    
 #   db:
 #     image: postgres
 #     restart: always
@@ -51,33 +61,18 @@ services:
 #     file: db/password.txt
   test:
     build:
-      context: .
+      context: ./web
       target: test-suite
     command: "-f /dev/null"
     entrypoint: /usr/bin/tail
-    environment:
-      POSTGRES_HOST: db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
-      POSTGRES_DB: example
     ports:
       - 3000:3000
       - 3001:3001
     volumes:
-      - ./package.json:/app/package.json
-      - ./package-lock.json:/app/package-lock.json
-      - ./.env:/app/.env
-      - ./app:/app/app
-      - ./components:/app/components
-      - ./utils:/app/utils
-      - ./api-server.js:/app/api-server.js
-      - ./tests:/app/tests
-  e2e-chrome:
-    image: "cypress/included:12.12.0"
-    # container_name: cypress
-    # "cypress/included" images have entrypoint set to globally installed cypress
-    # so the command can simply add any arguments
-    command: "--browser chrome"
-    volumes:
-      - ./cypress:/cypress
-      - ./cypress.config.js:/cypress.config.js
+      - ./web/package.json:/app/package.json
+      - ./web/package-lock.json:/app/package-lock.json
+      - ./web/.env:/app/.env
+      - ./web/app:/app/app
+      - ./web/components:/app/components
+      - ./web/utils:/app/utils
+      - ./web/tests:/app/tests

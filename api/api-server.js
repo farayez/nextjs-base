@@ -44,5 +44,11 @@ app.get('/api/shows', checkJwt, (req, res) => {
   });
 });
 
+app.get('/api/test-route', (req, res) => {
+  res.send({
+    msg: 'Route working'
+  });
+});
+
 const server = app.listen(port, () => console.log(`API Server listening on port ${port}`));
 process.on('SIGINT', () => server.close());
