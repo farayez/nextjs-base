@@ -13,10 +13,12 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY .babelrc ./
 COPY cypress.config.js ./
 
-CMD npm run dev
+CMD npm run dev:api
 
-FROM cypress/included as test
+FROM cypress/included:12.12.0 as test-suite
 # ENV NODE_ENV test
+WORKDIR /app
+EXPOSE 3000
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
     --mount=type=cache,target=/root/.npm \
@@ -25,5 +27,4 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 
 COPY . .
 RUN npm run build
-RUN npm run test:integration
 

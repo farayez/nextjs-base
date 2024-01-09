@@ -16,5 +16,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {},
     experimentalSessionAndOrigin: true,
     baseUrl: 'http://localhost:3000'
-  }
+  },
+  env: {
+    USER_EMAIL: 'testuser@gmail.com',
+    USER_PASSWORD: '1234abcd!@#$',
+  },
+  hosts: { localhost: '127.0.0.1' },
 });

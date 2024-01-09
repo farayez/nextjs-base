@@ -49,3 +49,35 @@ services:
 # secrets:
 #   db-password:
 #     file: db/password.txt
+  test:
+    build:
+      context: .
+      target: test-suite
+    command: "-f /dev/null"
+    entrypoint: /usr/bin/tail
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/db-password
+      POSTGRES_DB: example
+    ports:
+      - 3000:3000
+      - 3001:3001
+    volumes:
+      - ./package.json:/app/package.json
+      - ./package-lock.json:/app/package-lock.json
+      - ./.env:/app/.env
+      - ./app:/app/app
+      - ./components:/app/components
+      - ./utils:/app/utils
+      - ./api-server.js:/app/api-server.js
+      - ./tests:/app/tests
+  e2e-chrome:
+    image: "cypress/included:12.12.0"
+    # container_name: cypress
+    # "cypress/included" images have entrypoint set to globally installed cypress
+    # so the command can simply add any arguments
+    command: "--browser chrome"
+    volumes:
+      - ./cypress:/cypress
+      - ./cypress.config.js:/cypress.config.js
