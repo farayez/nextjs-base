@@ -13,7 +13,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY .babelrc ./
 COPY cypress.config.js ./
 
-CMD npm run dev:api
+CMD npm run dev:all
 
 FROM cypress/included:12.12.0 as test-suite
 # ENV NODE_ENV test

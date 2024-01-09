@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"next dev\" \"node api-server\"",
+    "dev:next": "next dev",
     "dev:api": "nodemon api-server",
+    "dev:all": "concurrently \"next dev\" \"nodemon api-server\"",
     "build": "next build",
     "start": "concurrently \"next start\" \"node api-server\"",
     "start:api": "node api-server",
