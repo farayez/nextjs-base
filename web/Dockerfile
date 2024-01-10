@@ -4,6 +4,7 @@ FROM node:${NODE_VERSION}-alpine as base
 WORKDIR /app
 EXPOSE 3000
 
+# -- Development image
 FROM base as dev
 RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=bind,source=package-lock.json,target=package-lock.json \
@@ -15,6 +16,7 @@ COPY cypress.config.js ./
 
 CMD npm run dev
 
+# -- Test using Cypress
 FROM cypress/included:12.12.0 as test-suite
 WORKDIR /app
 EXPOSE 3000
@@ -34,4 +36,3 @@ COPY ./public ./public
 COPY ./utils ./utils
 
 RUN npm run build
-
