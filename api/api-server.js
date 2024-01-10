@@ -44,9 +44,13 @@ app.get('/api/shows', checkJwt, (req, res) => {
   });
 });
 
-app.get('/api/test-route', (req, res) => {
+app.get('/api/health-check', (req, res) => {
   res.send({
-    msg: 'Route working'
+    app: 'OK',
+    env: {
+      APP_NAME: process.env.APP_NAME,
+      APP_ENV: process.env.APP_ENV
+    }
   });
 });
 
