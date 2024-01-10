@@ -1,0 +1,54 @@
+{
+  "name": "nextjs-base-api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon api-server",
+    "start": "node api-server",
+    "test": "jest tests --coverage --maxWorkers=10",
+    "test:watch": "jest --coverage --watch"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-jwt": "^8.0",
+    "helmet": "^7.1.0",
+    "jwks-rsa": "^3.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "rootDir": "./",
+    "moduleNameMapper": {
+      ".(css)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "setupFiles": [
+      "./tests/environment.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./tests/setup.js"
+    ],
+    "collectCoverageFrom": [
+      "components/**/*.*",
+      "pages/**/*.*"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "text-summary"
+    ]
+  }
+}

@@ -44,5 +44,15 @@ app.get('/api/shows', checkJwt, (req, res) => {
   });
 });
 
+app.get('/api/health-check', (req, res) => {
+  res.send({
+    app: 'OK',
+    env: {
+      APP_NAME: process.env.APP_NAME,
+      APP_ENV: process.env.APP_ENV
+    }
+  });
+});
+
 const server = app.listen(port, () => console.log(`API Server listening on port ${port}`));
 process.on('SIGINT', () => server.close());
