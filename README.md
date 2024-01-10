@@ -23,7 +23,7 @@ If you do not wish to use an API or observe the API call working, you should not
 
 The project needs to be configured with your Auth0 Domain, Client ID and Client Secret for the authentication flow to work.
 
-To do this, first copy `.env.local.example` into a new file in the same folder called `.env.local`, and replace the values with your own Auth0 application credentials (see more info about [loading environmental variables in Next.js](https://nextjs.org/docs/basic-features/environment-variables)):
+To do this, first copy `.env.example` into a new file in the same folder called `.env`, and replace the values with your own Auth0 application credentials (see more info about [loading environmental variables in Next.js](https://nextjs.org/docs/basic-features/environment-variables)):
 
 ```sh
 # A long secret value used to encrypt the session cookie
@@ -48,24 +48,65 @@ Get `AUTH0_AUDIENCE` from [AUTH0 Apis page](https://manage.auth0.com/?_gl=1*fk70
 
 **Note**: Make sure you replace `AUTH0_SECRET` with your own secret (you can generate a suitable string using `openssl rand -hex 32` on the command line).
 
-## Build and Run the Application During Development
+## Development
 
-### Build image and start a container
+### Build images and start the ecosystem
 
-- Build image
-- Install dependencies
-- Compile and serve Next.js app
-- Start the API server on port 3000
-- Allow hot-reload
+- Build images, install dependencies
+- Compile and serve Next.js app on port 3000 (`web`)
+- Start the API server on port 3001 (`api`)
+- Allow hot-reload on both web and api
 
 ```bash
-docker compose up --build server
+docker compose up --build web api
 ```
 
-### Enter running container
+### Enter a running container
 
+**Note**: If the container is not running, start it following [Build images and start the ecosystem](#build-images-and-start-the-ecosystem).
+
+- For `web` container
+    ```bash
+    docker compose exec web sh
+    ```
+- For `api` container
+    ```bash
+    docker compose exec api sh
+    ```
+
+### After any `package.json` update
+
+After a `package.json` update the `package-lock.json` will not update automatically. In order to update the lock file you need to enter the container and run `npm install`.
+
+- [Enter a running container](#enter-a-running-container)
+- Install dependencies
+    ```bash
+    npm install
+    ```
+
+### After any `.env` update
+
+After a `.env` file update the config will not be refreshed in the running app automatically. In order to use the updated config you need restart the container.
+
+- Stop container
+- Start container
+    ```bash
+    docker compose up --build web api
+    ```
+
+## Testing
+
+### Run Jest tests for web
+- [Enter a running container](#enter-a-running-container)
+- Run tests
+    ```bash
+    npm run test
+    ```
+
+### Run Cypress tests for web
+Start test-web-cypress container. It will start server and run tests
 ```bash
-docker compose exec server sh
+docker compose up --build test-web-cypress
 ```
 
 ## Build and Run the Application To Simulate Deployment
@@ -94,20 +135,6 @@ sh exec.sh
 docker build --file Dockerfile.prod -t nextjs-base-01 .
 ```
 
-### Run the unit tests
-
-```bash
-npm run test
-```
-
-### Run the integration tests
-
-```bash
-npm run test:integration
-```
-
-docker build -t nextjs-base-test --progress=plain --no-cache --target test .
-
 ## Issue Reporting
 
 If you have found a bug or if you have a feature request, please report them at this repository issues section. Please do not report security vulnerabilities on the public GitHub issue tracker. The [Responsible Disclosure Program](https://auth0.com/responsible-disclosure-policy) details the procedure for disclosing security issues.
@@ -121,5 +148,3 @@ If you have found a bug or if you have a feature request, please report them at 
 
 This project is licensed under the MIT license. See the [LICENSE](./LICENSE) file for more info.
 
-
-# Cypress
