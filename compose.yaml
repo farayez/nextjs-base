@@ -65,20 +65,14 @@ services:
 # secrets:
 #   db-password:
 #     file: db/password.txt
-  test:
+  test-web-cypress:
     build:
       context: ./web
       target: test-suite
-    command: "-f /dev/null"
-    entrypoint: /usr/bin/tail
+    command: "test:integration"
+    entrypoint: ["npm", "run"]
     ports:
       - 3000:3000
-      - 3001:3001
     volumes:
-      - ./web/package.json:/app/package.json
-      - ./web/package-lock.json:/app/package-lock.json
-      - ./web/.env:/app/.env
-      - ./web/app:/app/app
-      - ./web/components:/app/components
-      - ./web/utils:/app/utils
-      - ./web/tests:/app/tests
+      - ./web/cypress/screenshots:/app/cypress/screenshots
+      - ./web/cypress/videos:/app/cypress/videos

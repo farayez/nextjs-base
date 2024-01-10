@@ -23,6 +23,15 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --include=dev
 
-COPY . .
+COPY package.json ./package.json
+COPY package-lock.json ./package-lock.json
+COPY cypress.config.js ./cypress.config.js
+COPY .env ./.env
+COPY ./app ./app
+COPY ./components ./components
+COPY ./cypress ./cypress
+COPY ./public ./public
+COPY ./utils ./utils
+
 RUN npm run build
 
