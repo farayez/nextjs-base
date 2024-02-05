@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon api-server",
-    "start": "node api-server",
+    "dev": "nodemon src/api-server",
+    "start": "node src/api-server",
     "test": "jest --coverage --maxWorkers=10",
     "test:watch": "jest --coverage --watch"
   },
