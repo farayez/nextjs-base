@@ -34,7 +34,10 @@ services:
       - ./api/package.json:/app/package.json
       - ./api/package-lock.json:/app/package-lock.json
       - ./api/.env:/app/.env
+      - ./api/.env.testing:/app/.env.testing
       - ./api/api-server.js:/app/api-server.js
+      - ./api/tests:/app/tests
+      - ./api/src:/app/src
     networks:
       - backend
     # depends_on:

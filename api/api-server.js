@@ -21,7 +21,7 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors({ origin: baseUrl }));
 
-require('./utils/apiRoutes').addRoutes(app);
+require('./src/utils/apiRoutes').addRoutes(app);
 
 if (process.env.NODE_ENV == 'test') {
   module.exports = app;
