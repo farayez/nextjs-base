@@ -1,5 +1,8 @@
-const { expressjwt: jwt } = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
+import { expressjwt } from 'express-jwt';
+import jwksRsa from 'jwks-rsa';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 const issuerBaseUrl = process.env.AUTH0_ISSUER_BASE_URL;
 const audience = process.env.AUTH0_AUDIENCE;
 
@@ -12,7 +15,7 @@ if (!audience) {
   process.exit(1);
 }
 
-module.exports = jwt({
+export default expressjwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,

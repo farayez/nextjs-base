@@ -1,5 +1,5 @@
-const request = require('supertest');
-const app = require('../api-server');
+import { default as request } from 'supertest';
+import app from '../api-server.js';
 
 describe('GET /api/health-check', function () {
   it('responds with json', function (done) {

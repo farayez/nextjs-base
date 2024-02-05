@@ -1,8 +1,7 @@
 /**
- * GET /health
  * Health check endpoint
  */
-exports.getAppHealth = (req, res) => {
+export default function getAppHealth(req, res) {
   res.json({
     app: 'OK',
     env: {
@@ -10,4 +9,4 @@ exports.getAppHealth = (req, res) => {
       APP_ENV: process.env.APP_ENV
     }
   });
-};
+}

@@ -1,13 +1,15 @@
-if (process.env.NODE_ENV == 'test') {
-  require('dotenv').config({ path: './.env.testing' });
-} else {
-  require('dotenv').config({ path: './.env' });
-}
+import * as dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import addRoutes from './utils/apiRoutes.js';
 
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const helmet = require('helmet');
+if (process.env.NODE_ENV == 'test') {
+  dotenv.config({ path: './.env.testing' });
+} else {
+  dotenv.config({ path: './.env' });
+}
 
 const app = express();
 const port = process.env.API_PORT || 3001;
@@ -21,7 +23,7 @@ app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors({ origin: baseUrl }));
 
-require('./utils/apiRoutes').addRoutes(app);
+addRoutes(app);
 
 if (process.env.NODE_ENV == 'test') {
   module.exports = app;

@@ -1,12 +1,12 @@
 /**
  * Controllers (route handlers).
  */
-const healthCheckController = require('../controllers/utils/health-check');
-const validateTokenController = require('../controllers/utils/validate-token');
+import getAppHealth from '../controllers/utils/health-check.js';
+import validateToken from '../controllers/utils/validate-token.js';
 
-const checkJwt = require('./auth');
+import checkJwt from './auth.js';
 
-exports.addRoutes = function (app) {
-  app.get('/api/health-check', healthCheckController.getAppHealth);
-  app.get('/api/shows', checkJwt, validateTokenController.validateToken);
-};
+export default function addRoutes(app) {
+  app.get('/api/health-check', getAppHealth);
+  app.get('/api/shows', checkJwt, validateToken);
+}

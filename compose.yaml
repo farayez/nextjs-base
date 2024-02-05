@@ -36,6 +36,8 @@ services:
       - ./api/.env:/app/.env
       - ./api/.env.testing:/app/.env.testing
       - ./api/src:/app/src
+      - ./api/.babelrc:/app/.babelrc
+      - ./api/jest.config.js:/app/jest.config.js
     networks:
       - backend
     # depends_on:
