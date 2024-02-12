@@ -1,6 +1,6 @@
 import { expressjwt } from 'express-jwt';
 import jwksRsa from 'jwks-rsa';
-import { AUTH0_ISSUER_BASE_URL as ISSUER_BASE_URL, AUTH0_AUDIENCE as AUDIENCE } from '../config/index.js';
+import { AUTH0_ISSUER_BASE_URL as ISSUER_BASE_URL, AUTH0_AUDIENCE as AUDIENCE } from '../../config/index.js';
 
 if (!ISSUER_BASE_URL) {
   throw new Error('Please make sure that the file .env is in place and populated');

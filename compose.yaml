@@ -36,6 +36,7 @@ services:
       - ./api/.env:/app/.env
       - ./api/.env.testing:/app/.env.testing
       - ./api/src:/app/src
+      - ./api/config:/app/config
       - ./api/.babelrc:/app/.babelrc
       - ./api/jest.config.js:/app/jest.config.js
     networks:
