@@ -40,6 +40,7 @@ services:
       - ./api/.babelrc:/app/.babelrc
       - ./api/.sequelizerc:/app/.sequelizerc
       - ./api/jest.config.js:/app/jest.config.js
+      - ./api/reports:/app/reports
     networks:
       - backend
     # depends_on:

@@ -6,7 +6,7 @@ const config = {
   clearMocks: true,
   resetMocks: true,
   restoreMocks: true,
-  coverageDirectory: 'src/__tests__/coverage'
+  coverageDirectory: 'reports/coverage'
 };
 
 export default config;
