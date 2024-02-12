@@ -38,6 +38,7 @@ services:
       - ./api/src:/app/src
       - ./api/config:/app/config
       - ./api/.babelrc:/app/.babelrc
+      - ./api/.sequelizerc:/app/.sequelizerc
       - ./api/jest.config.js:/app/jest.config.js
     networks:
       - backend
