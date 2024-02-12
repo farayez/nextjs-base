@@ -5,7 +5,8 @@ const config = {
   forceExit: true,
   clearMocks: true,
   resetMocks: true,
-  restoreMocks: true
+  restoreMocks: true,
+  coverageDirectory: 'src/__tests__/coverage'
 };
 
 export default config;
