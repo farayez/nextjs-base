@@ -11,7 +11,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
     --mount=type=cache,target=/root/.npm \
     npm ci --include=dev
 
-RUN chown -R node:node /app/node_modules
+RUN chown -R node:node /app
 
 USER node
 
