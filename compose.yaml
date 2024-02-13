@@ -1,6 +1,13 @@
 networks:
   backend:
     driver: bridge
+  frontend:
+    driver: bridge
+volumes:
+  db-data:
+secrets:
+  db-password:
+    file: db/password.txt
 
 services:
   web:
@@ -18,7 +25,7 @@ services:
       - ./web/utils:/app/utils
       - ./web/tests:/app/tests
     networks:
-      - backend
+      - frontend
   api:
     build:
       context: ./api
@@ -43,34 +50,34 @@ services:
       - ./api/reports:/app/reports
     networks:
       - backend
-    # depends_on:
-    #   db:
-    #     condition: service_healthy
+      - frontend
+    depends_on:
+      db:
+        condition: service_healthy
     # secrets:
     #   - db-password
-#   db:
-#     image: postgres
-#     restart: always
-#     user: postgres
-#     secrets:
-#       - db-password
-#     volumes:
-#       - db-data:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_DB=example
-#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-#     expose:
-#       - 5432
-#     healthcheck:
-#       test: [ "CMD", "pg_isready" ]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 5
-# volumes:
-#   db-data:
-# secrets:
-#   db-password:
-#     file: db/password.txt
+  db:
+    image: postgres
+    restart: always
+    user: postgres
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=example
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
   test-web-cypress:
     build:
       context: ./web
