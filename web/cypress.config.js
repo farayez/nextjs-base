@@ -19,7 +19,7 @@ module.exports = defineConfig({
   },
   env: {
     USER_EMAIL: 'testuser@gmail.com',
-    USER_PASSWORD: '1234abcd!@#$',
+    USER_PASSWORD: '1234abcd!@#$'
   },
-  hosts: { localhost: '127.0.0.1' },
+  hosts: { localhost: '127.0.0.1' }
 });

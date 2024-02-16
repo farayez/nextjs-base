@@ -28,7 +28,7 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 COPY package.json ./package.json
 COPY package-lock.json ./package-lock.json
 COPY cypress.config.js ./cypress.config.js
-COPY .env ./.env
+COPY .env.testing ./.env
 COPY ./app ./app
 COPY ./components ./components
 COPY ./cypress ./cypress
