@@ -96,7 +96,7 @@ After a `.env` file update the config will not be refreshed in the running app a
 
 ## Testing
 
-### Run Jest tests for web
+### Run Jest tests for web and api
 - [Enter a running container](#enter-a-running-container)
 - Run tests
     ```bash
@@ -104,10 +104,19 @@ After a `.env` file update the config will not be refreshed in the running app a
     ```
 
 ### Run Cypress tests for web
-Start test-web-cypress container. It will start server and run tests
+- Make sure the `.env.testing` file is created and populated. 
+- Start test-web-cypress container. It will start server and run tests
 ```bash
 docker compose up --build test-web-cypress
 ```
+
+## Running Migrations
+[Sequelize Docs](https://sequelize.org/docs/v6/other-topics/migrations/#creating-the-first-model-and-migration)
+npx sequelize model:generate --name Test --attributes firstName:string,lastName:string,email:string
+npx sequelize-cli db:migrate
+npx sequelize-cli db:migrate:undo
+npx sequelize-cli db:migrate:undo:all
+npx sequelize-cli db:migrate:undo:all --to XXXXXXXXXXXXXX-create-posts.js
 
 ## Build and Run the Application To Simulate Deployment
 
