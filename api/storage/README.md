@@ -1,0 +1,2 @@
+- This directory will store runtime files like coverage report, csv exports etc.
+- The application will have write access to this directory

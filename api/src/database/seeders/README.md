@@ -1,0 +1,1 @@
+- This directory will store the seeders to load the database with some data during initiation.
